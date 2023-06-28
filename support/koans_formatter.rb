@@ -44,7 +44,7 @@ class KoansFormatter < RSpec::Core::Formatters::BaseFormatter
 
   def add_progress(prog)
     @_contents = nil
-    exists = File.exists?(PROGRESS_FILE_NAME)
+    exists = File.exist?(PROGRESS_FILE_NAME)
     File.open(PROGRESS_FILE_NAME, 'a+') do |f|
       f.print "#{',' if exists}#{prog}"
     end
@@ -52,7 +52,7 @@ class KoansFormatter < RSpec::Core::Formatters::BaseFormatter
 
   def progress
     if @_contents.nil?
-      if File.exists?(PROGRESS_FILE_NAME)
+      if File.exist?(PROGRESS_FILE_NAME)
         File.open(PROGRESS_FILE_NAME, 'r') do |f|
           @_contents = f.read.to_s.gsub(/\s/, '').split(',')
         end
