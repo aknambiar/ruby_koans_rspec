@@ -83,7 +83,7 @@ describe 'Constants' do
     end
   end
 
-  it "should demonstrate who_wins_with_explicit_scoping_on_class_definition" do
+  it 'should demonstrate who_wins_with_explicit_scoping_on_class_definition' do
     expect(MyAnimals::Oyster.new.legs_in_oyster).to eql __
   end
 
