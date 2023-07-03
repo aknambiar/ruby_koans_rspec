@@ -1,8 +1,7 @@
-# frozen_string_literal: true
-
 require 'spec_helper'
 
 describe 'Array Assignment' do
+  
   it 'should demonstrate non-parallel assignment' do
     names = ['John', 'Smith']
 

@@ -1,8 +1,7 @@
-# frozen_string_literal: true
-
 require 'spec_helper'
 
 describe 'Blocks' do
+  
   def method_with_block
     result = yield
     result
@@ -92,7 +91,7 @@ describe 'Blocks' do
   end
 
   it 'should demonstrate methods_can_take_an_explicit_block_argument' do
-    method_with_explicit_block { |n| n * 2 }.should eql __
+    expect(method_with_explicit_block { |n| n * 2 }).to eql __
     add_one = lambda { |n| n + 1 }
 
     expect(method_with_explicit_block(&add_one)).to eql __

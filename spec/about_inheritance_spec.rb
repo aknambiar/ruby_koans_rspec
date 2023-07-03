@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "Inheritance" do
+describe 'Inheritance' do
 
-  class Dog
+  class Dog10
     attr_reader :name
 
     def initialize(name)
@@ -10,76 +10,75 @@ describe "Inheritance" do
     end
 
     def bark
-      "WOOF"
+      'WOOF'
     end
   end
 
-  class Chihuahua < Dog
+  class Chihuahua < Dog10
     def wag
       :happy
     end
 
     def bark
-      "yip"
+      'yip'
     end
   end
 
-  it "should demonstrate subclasses_have_the_parent_as_an_ancestor" do
-    Chihuahua.ancestors.include?(Dog).should eql __
+  it 'should demonstrate subclasses_have_the_parent_as_an_ancestor' do
+    expect(Chihuahua.ancestors.include?(Dog10)).to eql __
   end
 
-  it "should demonstrate all_classes_ultimately_inherit_from_object" do
-    Chihuahua.ancestors.include?(Object).should eql __
+  it 'should demonstrate all_classes_ultimately_inherit_from_object' do
+    expect(Chihuahua.ancestors.include?(Object)).to eql __
   end
 
-  it "should demonstrate subclasses_inherit_behavior_from_parent_class" do
-    chico = Chihuahua.new("Chico")
-    chico.name.should eql __
+  it 'should demonstrate subclasses_inherit_behavior_from_parent_class' do
+    chico = Chihuahua.new('Chico')
+    expect(chico.name).to eql __
   end
 
-  it "should demonstrate subclasses_add_new_behavior" do
-    chico = Chihuahua.new("Chico")
-    chico.wag.should eql __
+  it 'should demonstrate subclasses_add_new_behavior' do
+    chico = Chihuahua.new('Chico')
+    expect(chico.wag).to eql __
 
     expect{
-      fido = Dog.new("Fido")
+      fido = Dog10.new('Fido')
       fido.wag
     }.to raise_error(__)
 
   end
 
-  it "should demonstrate subclasses_can_modify_existing_behavior" do
-    chico = Chihuahua.new("Chico")
-    chico.bark.should eql __
+  it 'should demonstrate subclasses_can_modify_existing_behavior' do
+    chico = Chihuahua.new('Chico')
+    expect(chico.bark).to eql __
 
-    fido = Dog.new("Fido")
-    fido.bark.should eql __
+    fido = Dog10.new('Fido')
+    expect(fido.bark).to eql __
   end
 
   # ------------------------------------------------------------------
 
-  class BullDog < Dog
+  class BullDog < Dog10
     def bark
-      super + ", GROWL"
+      super + ', GROWL'
     end
   end
 
-  it "should demonstrate subclasses_can_invoke_parent_behavior_via_super" do
-    ralph = BullDog.new("Ralph")
-    ralph.bark.should eql __
+  it 'should demonstrate subclasses_can_invoke_parent_behavior_via_super' do
+    ralph = BullDog.new('Ralph')
+    expect(ralph.bark).to eql __
   end
 
   # ------------------------------------------------------------------
 
-  class GreatDane < Dog
+  class GreatDane < Dog10
     def growl
-      super.bark + ", GROWL"
+      super.bark + ', GROWL'
     end
   end
 
-  it "should demonstrate super_does_not_work_cross_method" do
+  it 'should demonstrate super_does_not_work_cross_method' do
     george = GreatDane.new("George")
-    expect(george.growl).to raise_error(__)
+    expect { george.growl }.to raise_error(__)
   end
-
 end

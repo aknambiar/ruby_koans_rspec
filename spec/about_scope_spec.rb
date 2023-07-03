@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe "Scope" do
+describe 'Scope' do
 
   module Jims
-    class Dog
+    class Dog12
       def identify
         :jims_dog
       end
@@ -11,68 +11,68 @@ describe "Scope" do
   end
 
   module Joes
-    class Dog
+    class Dog12
       def identify
         :joes_dog
       end
     end
   end
 
-  it "should demonstrate dog_is_not_available_in_the_current_scope" do
-    expect(fido = Dog.new).to raise_error(__)
+  it 'should demonstrate dog_is_not_available_in_the_current_scope' do
+    expect { fido = Dog12.new }.to raise_error(__)
   end
 
-  it "should demonstrate you_can_reference_nested_classes_using_the_scope_operator" do
-    fido = Jims::Dog.new
-    rover = Joes::Dog.new
-    fido.identify.should eql __
-    rover.identify.should eql __
+  it 'should demonstrate you_can_reference_nested_classes_using_the_scope_operator' do
+    fido = Jims::Dog12.new
+    rover = Joes::Dog12.new
+    expect(fido.identify).to eql __
+    expect(rover.identify).to eql __
 
-    (fido.class != rover.class).should eql __
-    (Jims::Dog != Joes::Dog).should eql __
+    expect(fido.class != rover.class).to eql __
+    expect(Jims::Dog12 != Joes::Dog12).to eql __
   end
+end
 
-  # ------------------------------------------------------------------
-
+class AboutScope
+  PI = 3.1416
   class String
   end
 
-  it "should demonstrate bare_bones_class_names_assume_the_current_scope" do
-    (AboutScope::String == String).should eql __
-  end
+  describe 'Scope' do
 
-  it "should demonstrate nested_string_is_not_the_same_as_the_system_string" do
-    (String == "HI".class).should eql __
-  end
+    it 'should demonstrate constants_are_defined_with_an_initial_uppercase_letter' do
+      expect(PI).to eql __
+    end
 
-  it "should demonstrate use_the_prefix_scope_operator_to_force_the_global_scope" do
-    (::String == "HI".class).should eql __
-  end
+    it 'should demonstrate bare_bones_class_names_assume_the_current_scope' do
+      expect(AboutScope::String == String).to eql __
+    end
 
-  # ------------------------------------------------------------------
+    it 'should demonstrate nested_string_is_not_the_same_as_the_system_string' do
+      expect(String == 'HI'.class).to eql __
+    end
 
-  PI = 3.1416
+    it 'should demonstrate use_the_prefix_scope_operator_to_force_the_global_scope' do
+      expect(::String == 'HI'.class).to eql __
+    end
 
-  it "should demonstrate constants_are_defined_with_an_initial_uppercase_letter" do
-    PI.should eql __
-  end
+    # ------------------------------------------------------------------
 
-  # ------------------------------------------------------------------
+    MyString = ::String
 
-  MyString = ::String
+    it 'should demonstrate class_names_are_just_constants' do
+      expect(MyString == ::String).to eql __
+      expect(MyString == 'HI'.class).to eql __
+    end
 
-  it "should demonstrate class_names_are_just_constants" do
-    (MyString == ::String).should eql __
-    (MyString == "HI".class).should eql __
-  end
+    it 'should demonstrate constants_can_be_looked_up_explicitly' do
+      expect(PI == AboutScope.const_get('PI')).to eql __
+      expect(MyString == AboutScope.const_get('MyString')).to eql __
+    end
 
-  it "should demonstrate constants_can_be_looked_up_explicitly" do
-    (PI == AboutScope.const_get("PI")).should eql __
-    (MyString == AboutScope.const_get("MyString")).should eql __
-  end
-
-  it "should demonstrate you_can_get_a_list_of_constants_for_any_class_or_module" do
-    Jims.constants.should eql __
-    expect(Object.constants.size).should be > _n_
+    it 'should demonstrate you_can_get_a_list_of_constants_for_any_class_or_module' do
+      expect(Jims.constants).to eql __
+      expect(Object.constants.size).to be > _n_
+    end
   end
 end

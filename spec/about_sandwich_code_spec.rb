@@ -1,35 +1,35 @@
 require 'spec_helper'
 
-describe "Sandwich Code" do
-
+describe 'Sandwich Code' do
+  
   def count_lines(file_name)
-    file = open(file_name)
+    file = File.open(file_name)
     count = 0
-    while line = file.gets
+    while file.gets
       count += 1
     end
     count
   ensure
-    file.close if file
+    file&.close
   end
 
-  it "should demonstrate counting_lines" do
-    count_lines("example_file.txt").should eql __
+  it 'should demonstrate counting_lines' do
+    expect(count_lines('example_file.txt')).to eql __
   end
 
   # ------------------------------------------------------------------
 
   def find_line(file_name)
-    file = open(file_name)
-    while line = file.gets
+    file = File.open(file_name)
+    while (line = file.gets)
       return line if line.match(/e/)
     end
   ensure
-    file.close if file
+    file&.close
   end
 
-  it "should demonstrate finding_lines" do
-    find_line("example_file.txt").should eql __
+  it 'should demonstrate finding_lines' do
+    expect(find_line('example_file.txt')).to eql __
   end
 
   # ------------------------------------------------------------------
@@ -55,10 +55,10 @@ describe "Sandwich Code" do
   #
 
   def file_sandwich(file_name)
-    file = open(file_name)
+    file = File.open(file_name)
     yield(file)
   ensure
-    file.close if file
+    file&.close
   end
 
   # Now we write:
@@ -66,15 +66,15 @@ describe "Sandwich Code" do
   def count_lines2(file_name)
     file_sandwich(file_name) do |file|
       count = 0
-      while line = file.gets
+      while file.gets
         count += 1
       end
       count
     end
   end
 
-  it "should demonstrate counting_lines2" do
-    count_lines2("example_file.txt").should eql __
+  it 'should demonstrate counting_lines2' do
+    expect(count_lines2('example_file.txt')).to eql __
   end
 
   # ------------------------------------------------------------------
@@ -83,23 +83,23 @@ describe "Sandwich Code" do
     # Rewrite find_line using the file_sandwich library function.
   end
 
-  it "should demonstrate finding_lines2" do
-    find_line2("example_file.txt").should eql __
+  it 'should demonstrate finding_lines2' do
+    expect(find_line2('example_file.txt')).to eql __
   end
 
   # ------------------------------------------------------------------
 
   def count_lines3(file_name)
-    open(file_name) do |file|
+    File.open(file_name) do |file|
       count = 0
-      while line = file.gets
+      while file.gets
         count += 1
       end
       count
     end
   end
 
-  it "should demonstrate open_handles_the_file_sandwich_when_given_a_block" do
-    count_lines3("example_file.txt").should eql __
+  it 'should demonstrate open_handles_the_file_sandwich_when_given_a_block' do
+    expect(count_lines3('example_file.txt')).to eql __
   end
 end

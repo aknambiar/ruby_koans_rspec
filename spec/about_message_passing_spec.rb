@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Message Passing" do
+describe 'Message Passing' do
 
   class MessageCatcher
     def caught?
@@ -8,41 +8,41 @@ describe "Message Passing" do
     end
   end
 
-  it "should demonstrate methods_can_be_called_directly" do
+  it 'should demonstrate methods_can_be_called_directly' do
     mc = MessageCatcher.new
 
-    expect(mc.caught?).to be_true
+    expect(mc.caught?).to be true
   end
 
-  it "should demonstrate methods_can_be_invoked_by_sending_the_message" do
+  it 'should demonstrate methods_can_be_invoked_by_sending_the_message' do
     mc = MessageCatcher.new
 
-    expect(mc.send(:caught?)).to be_true
+    expect(mc.send(:caught?)).to be true
   end
 
-  it "should demonstrate methods_can_be_invoked_more_dynamically" do
+  it 'should demonstrate methods_can_be_invoked_more_dynamically' do
     mc = MessageCatcher.new
 
-    expect(mc.send("caught?")).to be_true
-    expect(mc.send("caught" + __)).to be_true # What do you need to add to the first string?
-    expect(mc.send("CAUGHT?".____)).to be_true  # What would you need to do to the string?
+    expect(mc.send('caught?')).to be true
+    expect(mc.send('caught' + __)).to be true # What do you need to add to the first string?
+    expect(mc.send('CAUGHT?'.____)).to be true # What would you need to do to the string?
   end
 
-  it "should demonstrate send_with_underscores_will_also_send_messages" do
+  it 'should demonstrate send_with_underscores_will_also_send_messages' do
     mc = MessageCatcher.new
 
-    mc.__send__(:caught?).should eql __
+    expect(mc.__send__(:caught?)).to eql __
 
     # THINK ABOUT IT:
     #
     # Why does Ruby provide both send and __send__ ?
   end
 
-  it "should demonstrate classes_can_be_asked_if_they_know_how_to_respond" do
+  it 'should demonstrate classes_can_be_asked_if_they_know_how_to_respond' do
     mc = MessageCatcher.new
 
-    mc.respond_to?(:caught?).should eql __
-    mc.respond_to?(:does_not_exist).should eql __
+    expect(mc.respond_to?(:caught?)).to eql __
+    expect(mc.respond_to?(:does_not_exist)).to eql __
   end
 
   # ------------------------------------------------------------------
@@ -53,14 +53,14 @@ describe "Message Passing" do
     end
   end
 
-  it "should demonstrate sending_a_message_with_arguments" do
+  it 'should demonstrate sending_a_message_with_arguments' do
     mc = MessageCatcher.new
 
-    mc.add_a_payload.should eql __
-    mc.send(:add_a_payload).should eql __
+    expect(mc.add_a_payload).to eql __
+    expect(mc.send(:add_a_payload)).to eql __
 
-    mc.add_a_payload(3, 4, nil, 6).should eql __
-    mc.send(:add_a_payload, 3, 4, nil, 6).should eql __
+    expect(mc.add_a_payload(3, 4, nil, 6)).to eql __
+    expect(mc.send(:add_a_payload, 3, 4, nil, 6)).to eql __
   end
 
   # ------------------------------------------------------------------
@@ -68,17 +68,17 @@ describe "Message Passing" do
   class TypicalObject
   end
 
-  it "should demonstrate sending_undefined_messages_to_a_typical_object_results_in_errors" do
+  it 'should demonstrate sending_undefined_messages_to_a_typical_object_results_in_errors' do
     typical = TypicalObject.new
 
-    expect{ typical.foobar }.to raise_error(__, /__/)
+    expect { typical.foobar }.to raise_error(__, /__/)
 
   end
 
-  it "should demonstrate calling_method_missing_causes_the_no_method_error" do
+  it 'should demonstrate calling_method_missing_causes_the_no_method_error' do
     typical = TypicalObject.new
 
-    expect{ typical.method_missing(:foobar) }.to raise_error(__, /__/)
+    expect { typical.method_missing(:foobar) }.to raise_error(__, /__/)
 
 
     # THINK ABOUT IT:
@@ -103,48 +103,48 @@ describe "Message Passing" do
 
   class AllMessageCatcher
     def method_missing(method_name, *args, &block)
-      "Someone called #{method_name} with <#{args.join(", ")}>"
+      "Someone called #{method_name} with <#{args.join(', ')}>"
     end
   end
 
-  it "should demonstrate all_messages_are_caught" do
+  it 'should demonstrate all_messages_are_caught' do
     catcher = AllMessageCatcher.new
 
-    catcher.foobar.should eql __
-    catcher.foobaz(1).should eql __
-    catcher.sum(1, 2, 3, 4, 5, 6).should eql __
+    expect(catcher.foobar).to eql __
+    expect(catcher.foobaz(1)).to eql __
+    expect(catcher.sum(1, 2, 3, 4, 5, 6)).to eql __
   end
 
-  it "should demonstrate catching_messages_makes_respond_to_lie" do
+  it 'should demonstrate catching_messages_makes_respond_to_lie' do
     catcher = AllMessageCatcher.new
 
-    expect(catcher.any_method).should_not raise_error(__)
-    catcher.respond_to?(:any_method).should eql __
+    expect { catcher.any_method }.not_to raise_error(__)
+    expect(catcher.respond_to?(:any_method)).to eql __
   end
 
   # ------------------------------------------------------------------
 
   class WellBehavedFooCatcher
     def method_missing(method_name, *args, &block)
-      if method_name.to_s[0, 3] == "foo"
-        "Foo to you too"
+      if method_name.to_s[0, 3] == 'foo'
+        'Foo to you too'
       else
         super(method_name, *args, &block)
       end
     end
   end
 
-  it "should demonstrate foo_method_are_caught" do
+  it 'should demonstrate foo_method_are_caught' do
     catcher = WellBehavedFooCatcher.new
 
-    catcher.foo_bar.should eql __
-    catcher.foo_baz.should eql __
+    expect(catcher.foo_bar).to eql __
+    expect(catcher.foo_baz).to eql __
   end
 
-  it "should demonstrate non_foo_messages_are_treated_normally" do
+  it 'should demonstrate non_foo_messages_are_treated_normally' do
     catcher = WellBehavedFooCatcher.new
 
-    expect(catcher.normal_undefined_method).to raise_error(__)
+    expect { catcher.normal_undefined_method }.to raise_error(__)
   end
 
   # ------------------------------------------------------------------
@@ -152,7 +152,7 @@ describe "Message Passing" do
   # (note: just reopening class from above)
   class WellBehavedFooCatcher
     def respond_to?(method_name)
-      if method_name.to_s[0, 3] == "foo"
+      if method_name.to_s[0, 3] == 'foo'
         true
       else
         super(method_name)
@@ -160,10 +160,10 @@ describe "Message Passing" do
     end
   end
 
-  it "should demonstrate explicitly_implementing_respond_to_lets_objects_tell_the_truth" do
+  it 'should demonstrate explicitly_implementing_respond_to_lets_objects_tell_the_truth' do
     catcher = WellBehavedFooCatcher.new
 
-    catcher.respond_to?(:foo_bar).should eql __
-    catcher.respond_to?(:something_else).should eql __
+    expect(catcher.respond_to?(:foo_bar)).to eql __
+    expect(catcher.respond_to?(:something_else)).to eql __
   end
 end

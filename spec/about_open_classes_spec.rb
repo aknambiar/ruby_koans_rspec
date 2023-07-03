@@ -1,30 +1,30 @@
 require 'spec_helper'
 
-describe "Open Classes" do
-  class Dog
+describe 'Open Classes' do
+  class Dog9
     def bark
-      "WOOF"
+      'WOOF'
     end
   end
 
-  it "should demonstrate as_defined_dogs_do_bark" do
-    fido = Dog.new
-    fido.bark.should eql __
+  it 'should demonstrate as_defined_dogs_do_bark' do
+    fido = Dog9.new
+    expect(fido.bark).to eql __
   end
 
   # ------------------------------------------------------------------
 
   # Open the existing Dog class and add a new method.
-  class Dog
+  class Dog9
     def wag
-      "HAPPY"
+      'HAPPY'
     end
   end
 
-  it "should demonstrate after_reopening_dogs_can_both_wag_and_bark" do
-    fido = Dog.new
-    fido.wag.should eql __
-    fido.bark.should eql __
+  it 'should demonstrate after_reopening_dogs_can_both_wag_and_bark' do
+    fido = Dog9.new
+    expect(fido.wag).to eql __
+    expect(fido.bark).to eql __
   end
 
   # ------------------------------------------------------------------
@@ -35,9 +35,9 @@ describe "Open Classes" do
     end
   end
 
-  it "should demonstrate even_existing_built_in_classes_can_be_reopened" do
-    1.even?.should eql __
-    2.even?.should eql __
+  it 'should demonstrate even_existing_built_in_classes_can_be_reopened' do
+    expect(1.even?).to eql __
+    expect(2.even?).to eql __
   end
 
   # NOTE: To understand why we need the :: before Integer, you need to

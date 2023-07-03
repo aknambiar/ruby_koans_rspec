@@ -1,8 +1,7 @@
-# frozen_string_literal: true
-
 require 'spec_helper'
 
 describe 'Arrays' do
+  
   it 'should demonstrate array creation' do
     empty_array = Array.new
 

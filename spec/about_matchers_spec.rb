@@ -1,71 +1,70 @@
 require 'spec_helper'
 
-describe "Matchers" do
-
-  it "should allow matching with equality operator" do
-    true.should == false
+describe 'Matchers' do
+  
+  it 'should allow matching with equality matcher' do
+    expect(true).to eql(__)
   end
 
-  it "should allow matching with built in matchers" do
-    true.should be_false
+  it 'should allow matching with built in matchers' do
+    expect(true).to be __
   end
 
-  it "should allow matching with built in matchers and a message" do
-    true.should_not be_true, "This should be false -- Please fix this"
+  it 'should allow matching with built in matchers and a message' do
+    expect(true).not_to be __ # This should be false -- Please fix this
   end
 
-  it "should allow matching of variables" do
+  it 'should allow matching of variables' do
     expected_value = __
     actual_value = 1 + 1
 
-    actual_value.should == expected_value
+    expect(actual_value).to eq(expected_value)
   end
 
-  it "should allow matching of variables using a better way" do
+  it 'should allow matching of variables using a better way' do
     expected_value = __
     actual_value = 1 + 1
 
-    actual_value.should eq(expected_value)
+    expect(actual_value).to eq(expected_value)
   end
 
-  it "should allow matching of values using equality" do
+  it 'should allow matching of values using equality' do
     expected_value = __
     actual_value = 1 + 1
 
-    actual_value.should eql(expected_value)
+    expect(actual_value).to eql(expected_value)
   end
 
   # We should all have our own unique identity
-  it "should allow matching of identity using equality " do
-    expected_value = "I should be something else"
+  it 'should allow matching of identity using equality' do
+    expected_value = 'I should be something else'
     actual_value = expected_value
 
-    actual_value.should_not equal(expected_value)
+    expect(actual_value).not_to equal(expected_value)
   end
 
-  it "should allow matching near values" do
-    2.should be_within(3).of(_n_)
+  it 'should allow matching near values' do
+    expect(2).to be_within(3).of(_n_)
   end
 
-  #be_nil            - nil
-  #be                - nil
-  #exist             - nil
+  # be_nil            - nil
+  # be                - nil
+  # exist             - nil
 
-  #be_a              - objects
-  #be_an_instance_of - objects
+  # be_a              - objects
+  # be_an_instance_of - objects
 
-  #cover             - ranges
+  # cover             - ranges
 
-  #end_with          - string
-  #have              - string
-  #have_at_least     - string
-  #have_at_most      - string
-  #start_with        - string
-  #include           - string
+  # end_with          - string
+  # have              - string
+  # have_at_least     - string
+  # have_at_most      - string
+  # start_with        - string
+  # include           - string
 
-  #match             - regex
+  # match             - regex
 
-  #include           - arrays
-  #match_array       - arrays
-
+  # include           - arrays
+  # match_array       - arrays
 end
