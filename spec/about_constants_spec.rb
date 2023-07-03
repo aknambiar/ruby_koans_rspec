@@ -84,7 +84,7 @@ describe 'Constants' do
   end
 
   it "should demonstrate who_wins_with_explicit_scoping_on_class_definition" do
-    MyAnimals::Oyster.new.legs_in_oyster.should eql __
+    expect(MyAnimals::Oyster.new.legs_in_oyster).to eql __
   end
 
   # QUESTION: Now which has precedence: The constant in the lexical
